@@ -50,4 +50,47 @@
   padding-top: 90px; /* Adjust based on navbar height */
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding-left: 5%;
+}
+
+.hero-content {
+  text-align: left;
+  padding-left: 2rem;
+  font-size: medium; /* Adjust spacing */
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-image-container {
+  
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2rem; /* Adjust for fine-tuning */
+  margin-left: -80px; /
+}
+
+
+
+
+
+
+
+
+
 
