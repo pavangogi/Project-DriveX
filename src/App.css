@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  text-align: center;
+  height: 100vh; /* Full viewport height */
+  padding-top: 90px; /* Adjust based on navbar height */
+}
+
+
