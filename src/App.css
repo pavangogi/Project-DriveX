@@ -49,11 +49,13 @@
   height: 100vh; /* Full viewport height */
   padding-top: 90px; /* Adjust based on navbar height */
 }
-
-html, body {
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
+  box-sizing: border-box;
+}
+
+html, body {
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
@@ -68,13 +70,16 @@ html, body {
 
 .hero-content {
   text-align: left;
-  padding-left: 2rem;
-  font-size: medium; /* Adjust spacing */
+  padding-left: 0;
+  margin-left: -100px;
+  font-size: medium; 
 }
 
 .hero-image {
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
   height: auto;
+  
 }
 
 .hero-image-container {
@@ -82,8 +87,137 @@ html, body {
   display: flex;
   justify-content: flex-start;
   padding-left: 2rem; /* Adjust for fine-tuning */
-  margin-left: -80px; /
+  margin-left: -30px; /
 }
+
+/* Default Light Mode */
+body {
+  background-color: #f8f9fa; /* Light gray */
+  color: #212529; /* Dark text */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #212529; /* Dark background */
+  color: #f8f9fa; /* Light text */
+}
+/* Light mode navbar */
+.navbar-custom {
+  background-color: #343a40 !important; /* Blue color for light mode */
+  color: white !important;
+}
+
+/* Dark mode navbar */
+.dark-mode .navbar-custom {
+  background-color: #1e1e1e !important; /* Dark navbar */
+  color: white !important;
+}
+.navbar.bg-dark {
+  background-color: #343a40 !important;
+}
+
+
+/* Nav links hover effect */
+.navbar-custom .nav-link {
+  color: white !important; /* Default text color */
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #f8f9fa !important; /* White on hover */
+}
+
+.app-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  background: #343a40;
+  color: white;
+  padding: 20px 0;
+  position: relative;
+  left: 0;
+}
+
+
+.footer-top h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.footer-middle {
+  margin: 15px 0;
+}
+
+.footer-middle h6 {
+  font-size: 1.2rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.5rem;
+}
+
+.social-icons a {
+  color: white;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #f8f9fa;
+}
+
+.footer-bottom p {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+.form-label {
+  color: black !important;
+}
+.modal-title {
+  color: black !important;
+}
+
+.modal-footer {
+  color: black !important;
+}
+
+.modal-footer p {
+  color: black !important;
+}
+/* Force black text for radio labels */
+.form-check-label {
+  color: black !important;
+}
+
+/* Force black text for "Already have an account?" */
+.signup-footer-text {
+  color: black !important;
+}
+[data-bs-theme="dark"] .signup-footer-text {
+  color: black !important;
+}
+
+
+
+
+
+
+
+
+
 
 
 

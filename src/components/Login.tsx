@@ -53,14 +53,7 @@ const Login: React.FC<LoginProps> = ({ show, handleClose }) => {
         )}
       </Modal.Body>
       <Modal.Footer>
-        {showSignup ? (
-          <p className="text-center">
-            Already have an account?{" "}
-            <Button variant="link" onClick={toggleSignup}>
-              Login
-            </Button>
-          </p>
-        ) : (
+        {!showSignup && ( // Only show this if NOT in Signup mode
           <p className="text-center">
             Don't have an account?{" "}
             <Button variant="link" onClick={toggleSignup}>
