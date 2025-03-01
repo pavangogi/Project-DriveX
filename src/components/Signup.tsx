@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 interface SignupProps {
   handleClose: () => void;
   toggleSignup: () => void;
 }
 
-const Signup: React.FC<SignupProps> = ({ handleClose, toggleSignup }) => {
+const Signup: React.FC<SignupProps> = ({ toggleSignup }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,8 +18,8 @@ const Signup: React.FC<SignupProps> = ({ handleClose, toggleSignup }) => {
   });
 
   const [errors, setErrors] = useState({ email: "", password: "" });
+  const [serverResponse, setServerResponse] = useState("");
 
-  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -27,23 +28,16 @@ const Signup: React.FC<SignupProps> = ({ handleClose, toggleSignup }) => {
     });
   };
 
-  // Email validation
-  const validateEmail = (email: string) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+  const validatePassword = (password: string) =>
+    /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/.test(password);
 
-  // Password validation
-  const validatePassword = (password: string) => {
-    return /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/.test(password); // At least 1 uppercase & 1 symbol
-  };
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     let emailError = validateEmail(formData.email)
       ? ""
-      : "Enter a valid email (e.g., example@gmail.com)";
+      : "Invalid email format";
     let passwordError = validatePassword(formData.password)
       ? ""
       : "Password must have at least 1 uppercase letter and 1 special symbol";
@@ -51,8 +45,22 @@ const Signup: React.FC<SignupProps> = ({ handleClose, toggleSignup }) => {
     setErrors({ email: emailError, password: passwordError });
 
     if (!emailError && !passwordError && formData.termsAccepted) {
-      alert("Signup successful!");
-      handleClose(); // Close modal
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/signup",
+          formData,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        setServerResponse(response.data);
+        alert(response.data); // Display success message
+        toggleSignup(); // Close modal
+      } catch (error) {
+        setServerResponse("Signup failed! Please try again.");
+        console.error("Signup Error:", error);
+      }
     }
   };
 
@@ -148,6 +156,8 @@ const Signup: React.FC<SignupProps> = ({ handleClose, toggleSignup }) => {
       <Button variant="primary" type="submit">
         Sign Up
       </Button>
+
+      {serverResponse && <p className="text-center mt-3">{serverResponse}</p>}
 
       <p className="text-center mt-3">
         Already have an account?{" "}
